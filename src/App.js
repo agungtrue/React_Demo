@@ -1,23 +1,51 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
+import { notification } from 'antd';
+import { getData } from './API/Request'
 import './App.css';
+import Table from './components/Table'
 
 function App() {
+  const [dataList, setDataList] = useState([])
+  const [loading, setLoading] = useState(false)
+
+
+  useEffect(() => {
+      getApi('getData')
+  }, [])
+
+  //api methods
+  const getApi = async (type) => {
+
+      try {
+          if(type === 'getData') {
+            const response = await getData
+            console.log('response', response.data)
+
+            if(response && response.data) {
+                setDataList(response.data)
+            }
+          }
+          else alert('invalid request type')
+
+      } catch (err) {
+          console.log('err', err.message)
+
+          notification.error({
+              message: err.message,
+              duration: 5
+          });
+      }
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Test Screening React JS Hooks</p>
+      <div className="container">
+        <Table
+            dataSource={dataList}
+         />
+      </div>
     </div>
   );
 }
