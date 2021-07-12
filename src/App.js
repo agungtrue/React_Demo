@@ -6,8 +6,6 @@ import Table from './components/Table'
 
 function App() {
   const [dataList, setDataList] = useState([])
-  const [loading, setLoading] = useState(false)
-
 
   useEffect(() => {
       getApi('getData')

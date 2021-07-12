@@ -36,3 +36,27 @@ export const getData = new Promise((resolve, reject) => {
         resolve(data);
     }, 1500);
 })
+
+export const updateData = (newchanges, allData) => {
+    return new Promise((resolve, reject) => {
+        if(expectError) return reject(error)
+
+        // i assume dataList always true/not null
+        if(allData && allData.length) {
+            const dataList = allData;
+            const changes = newchanges
+            const checker = [...dataList].filter(data => data.user_id === changes.user_id);
+    
+            if(!checker) alert('data not found')
+    
+            // acting like user_id
+            const findIndex = dataList.findIndex(data => data.user_id === changes.user_id);
+    
+            // save data
+            dataList[findIndex] = { ...changes }
+
+            // response
+            resolve(dataList);
+        }
+    })
+}

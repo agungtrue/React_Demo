@@ -1,0 +1,429 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic snapshot with all required props 1`] = `
+Array [
+  <button
+    className="btn btn-primary btn-lg"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    type="button"
+  >
+     Create
+  </button>,
+  <div
+    className="table-responsive"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            No
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            User Name (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Score (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Registered (
+            )
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        Please wait....
+      </tbody>
+    </table>
+  </div>,
+]
+`;
+
+exports[`renders Modal component without crashing 1`] = `null`;
+
+exports[`renders table component without crashing 1`] = `
+Array [
+  <button
+    className="btn btn-primary btn-lg"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    type="button"
+  >
+     Create
+  </button>,
+  <div
+    className="table-responsive"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            No
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            User Name (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Score (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Registered (
+            )
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        Please wait....
+      </tbody>
+    </table>
+  </div>,
+]
+`;
+
+exports[`renders without crashing 1`] = `
+<div
+  className="App"
+>
+  <p>
+    Test Screening React JS Hooks
+  </p>
+  <div
+    className="container"
+  >
+    <button
+      className="btn btn-primary btn-lg"
+      disabled={false}
+      onClick={[Function]}
+      style={
+        Object {
+          "marginBottom": "1rem",
+        }
+      }
+      type="button"
+    >
+       Create
+    </button>
+    <div
+      className="table-responsive"
+    >
+      <table
+        className="table table-striped table-bordered table-hover"
+      >
+        <thead>
+          <tr>
+            <th>
+              No
+            </th>
+            <th
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+            >
+              User Name (
+              
+              )
+            </th>
+            <th
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+            >
+              Score (
+              
+              )
+            </th>
+            <th
+              onClick={[Function]}
+              style={
+                Object {
+                  "cursor": "pointer",
+                }
+              }
+            >
+              Registered (
+              )
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          Please wait....
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`snapshot with all required props 1`] = `
+Array [
+  <button
+    className="btn btn-primary btn-lg"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    type="button"
+  >
+     Create
+  </button>,
+  <div
+    className="table-responsive"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            No
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            User Name (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Score (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Registered (
+            )
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <td>
+            1
+          </td>
+          <td
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            John Doe
+          </td>
+          <td>
+            12
+          </td>
+          <td
+            style={
+              Object {
+                "cursor": "pointer",
+                "display": "flex",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            2021-06-23T06:32:23+00:00
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+]
+`;
+
+exports[`snapshot with all required props in Table Component 1`] = `
+Array [
+  <button
+    className="btn btn-primary btn-lg"
+    disabled={false}
+    onClick={[Function]}
+    style={
+      Object {
+        "marginBottom": "1rem",
+      }
+    }
+    type="button"
+  >
+     Create
+  </button>,
+  <div
+    className="table-responsive"
+  >
+    <table
+      className="table table-striped table-bordered table-hover"
+    >
+      <thead>
+        <tr>
+          <th>
+            No
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            User Name (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Score (
+            
+            )
+          </th>
+          <th
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            Registered (
+            )
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+        >
+          <td>
+            1
+          </td>
+          <td
+            onClick={[Function]}
+            style={
+              Object {
+                "cursor": "pointer",
+              }
+            }
+          >
+            John Doe
+          </td>
+          <td>
+            12
+          </td>
+          <td
+            style={
+              Object {
+                "cursor": "pointer",
+                "display": "flex",
+                "justifyContent": "space-between",
+              }
+            }
+          >
+            2021-06-23T06:32:23+00:00
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>,
+]
+`;

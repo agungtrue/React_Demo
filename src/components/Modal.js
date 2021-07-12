@@ -2,16 +2,18 @@ import React, { useState, useEffect } from "react";
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import { updateData } from '../API/Request'
 
 
 const ModalName = (props) => {
 
-    const { showed, handleModal, dataList, handleNewData } = props
+    const { showed, handleModal, dataList, handleNewData, dataSelected, actionType } = props
 
     const [show, setShow] = useState(false);
     const handleClose = () => {
         setShow(false)
         handleModal(false)
+        resetDataModal()
     };
 
     const [newData, setNewData] = useState({
@@ -26,6 +28,17 @@ const ModalName = (props) => {
         score: { text: '', show: false }
     })
 
+    const handleUpdateData = (data) => {
+        updateData(data, dataList)
+            .then(res => {
+                // pass to parent
+                handleNewData(res)
+
+                resetDataModal()
+                handleClose()
+            })
+            .catch(err => console.log('err', err))
+    }
 
     const createNewData = (data) => {
         let newUserInput = data
@@ -34,9 +47,9 @@ const ModalName = (props) => {
         const d = new Date()
         const year = d.getFullYear()
         const date = d.getDate() 
-        const month = d.getMonth() 
+        const month = d.getMonth().length > 1 ? d.getMonth() + 1 : `0${d.getMonth()+1}`
 
-         let dateTemp = `${year}-${month+1}-${date}T23:59:22+00:00`
+         let dateTemp = `${year}-${month}-${date}T23:59:22+00:00`
         newUserInput.registered = dateTemp
 
         // merge
@@ -46,8 +59,13 @@ const ModalName = (props) => {
         // pass to parent
         handleNewData(addingData)
 
-         // reset form
-         let reset = {
+        resetDataModal()
+        handleClose()
+    }
+
+    const resetDataModal = () => {
+        // reset form
+        let reset = {
             user_name: { text: '', show: false },
             email: { text: '', show: false },
             score: { text: '', show: false }
@@ -60,7 +78,6 @@ const ModalName = (props) => {
             score: ''
         }
         setNewData(defaultInput)
-        handleClose()
     }
 
     const validateForm = () => {
@@ -96,7 +113,7 @@ const ModalName = (props) => {
             }
         }
 
-        // reset err
+        // reset err, only for this function scope
         if(valid) {
             let reset = {
               user_name: { text: '', show: false },
@@ -111,7 +128,9 @@ const ModalName = (props) => {
 
     const validateEmail = (email) => {
         let valid = false
-        if(email.includes('@')) valid = true
+
+        // googling
+        if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(email)) valid = true
 
         return valid
     }
@@ -119,7 +138,9 @@ const ModalName = (props) => {
     const validateScore = (score) => {
         let valid = false
         const limit = 100
-        if(score.length <= 3 && Number(score) <= limit) valid = true
+        const checkLength = String(score)
+
+        if(checkLength.length <= 3 && Number(score) <= limit) valid = true
 
         return valid
     }
@@ -138,20 +159,22 @@ const ModalName = (props) => {
 
     useEffect(() => {
         setShow(showed)
-    }, [showed])
+        setNewData(dataSelected)
+    }, [showed, dataSelected])
 
     return (
         <>
           <Modal show={show} onHide={handleClose}>
             <Modal.Header closeButton>
-              <Modal.Title>Create Data</Modal.Title>
+              <Modal.Title>{actionType === 'create' ? 'Create' : 'Update'} Data</Modal.Title>
             </Modal.Header>
             <Modal.Body>
             <Form>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>User Name</Form.Label>
                     <Form.Control 
-                        type="text" 
+                        type="text"
+                        value={newData ? newData.user_name : ''}
                         placeholder="Enter Username" 
                         onChange={(e) => setNewData({...newData, user_name: e.target.value})} 
                     />
@@ -160,7 +183,8 @@ const ModalName = (props) => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Email</Form.Label>
                     <Form.Control 
-                        type="email" 
+                        type="email"
+                        value={newData ? newData.email : ''}
                         placeholder="Enter Email"
                         onChange={(e) => setNewData({...newData, email: e.target.value})} 
                     />
@@ -169,7 +193,8 @@ const ModalName = (props) => {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Score</Form.Label>
                     <Form.Control 
-                        type="number" 
+                        type="number"
+                        value={newData ? newData.score : ''}
                         placeholder="Enter Score"
                         onChange={(e) => setNewData({...newData, score: e.target.value})} 
                     />
@@ -181,9 +206,15 @@ const ModalName = (props) => {
               <Button variant="secondary" onClick={handleClose}>
                 Close
               </Button>
-              <Button variant="primary" onClick={() => validateForm() && createNewData(newData) }>
-                Add
-              </Button>
+             {
+                actionType === 'create' ?
+                <Button variant="primary" onClick={() => validateForm() && createNewData(newData) }>
+                    Add
+                </Button> :
+                 <Button variant="primary" onClick={() => validateForm() && handleUpdateData(newData) }>
+                    Update
+                </Button>
+             }
             </Modal.Footer>
           </Modal>
         </>
