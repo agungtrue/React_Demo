@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { notification } from 'antd';
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
 import ModalName from './Modal'
+import Expanse from './rowExpand'
+import { updateData } from '../API/Request'
 
 
 const Tables = (props) => {
@@ -9,6 +12,7 @@ const Tables = (props) => {
     const [showBtn, setShowBtn] = useState({
         data: {}
     })
+    const [expandRow, setExpandRow] = useState([])
     const [dataList, setDataList] = useState([])
     const [dataSelected, setDataSelected] = useState({})
     const [actionType, setActionType] = useState('')
@@ -83,6 +87,24 @@ const Tables = (props) => {
         }
     }
 
+    const handleUpdateData = (data) => {
+        updateData(data, dataList)
+            .then(res => {
+                // pass to parent
+                handleNewData(res)
+            })
+            .catch(err => console.log('err', err))
+    }
+
+    const handleExpandRow = (data) => {
+        const obj = {...data}
+        const checker = [...expandRow].filter(curr => curr.user_id === obj.user_id)
+        if(!checker.length) {
+            setExpandRow([...expandRow, obj])
+        }
+        else setExpandRow([...expandRow].filter(curr => curr.user_id !== obj.user_id))
+    }
+
     return (
         <>
             <Button 
@@ -91,7 +113,7 @@ const Tables = (props) => {
                 onClick={() => openModalCreate('create')}
                 style={{marginBottom: '1rem'}}> Create
             </Button>
-            <Table striped bordered hover responsive>
+            <Table striped bordered hover responsive="sm">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -104,25 +126,40 @@ const Tables = (props) => {
                     {
                             dataList && dataList.length ? dataList.map((data, index) => 
                             (
-                                <tr
-                                    key={data.user_id}
-                                    onMouseEnter={() => setShowBtn({...showBtn, data})}
-                                    onMouseLeave={() => setShowBtn({...showBtn, data: {}})}
-                                >
-                                    <td>{index+1}</td>
-                                    <td style={{cursor:'pointer'}} onClick={() => openModalCreate('update', data)}>{data.user_name}</td>
-                                    <td>{data.score}</td>
-                                    <td style={{display: 'flex', justifyContent: 'space-between', cursor: 'pointer'}}>
-                                        {data.registered}
-                                        { showBtn.data && showBtn.data.user_id === data.user_id && <span onClick={() => deleteData(data)}>Delete</span> }
-                                    </td>
-                                </tr>
+                                <>
+                                    <tr
+                                        key={data.user_id}
+                                        onMouseEnter={() => setShowBtn({...showBtn, data})}
+                                        onMouseLeave={() => setShowBtn({...showBtn, data: {}})}
+                                    >
+                                        <td>{index+1}</td>
+                                        {/* <td style={{cursor:'pointer'}} onClick={() => openModalCreate('update', data)}>{data.user_name}</td> */}
+                                        <td style={{cursor:'pointer'}} onClick={() => handleExpandRow(data)}>{data.user_name}</td>
+                                        <td>{data.score}</td>
+                                        <td>
+                                            <div style={{display: 'flex', justifyContent: 'space-between', cursor: 'pointer'}}>
+                                                {data.registered}
+                                                <div style={{color: 'red'}}>
+                                                    { showBtn.data && showBtn.data.user_id === data.user_id && <span onClick={() => deleteData(data)}>Delete</span>}
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {
+                                        expandRow.length && expandRow.filter(curr => curr.user_id === data.user_id).length ?
+                                        <Expanse
+                                            data={data}
+                                            handleUpdateData={handleUpdateData}
+                                            handleCloseRow={setExpandRow}
+                                        />
+                                        : ""
+                                    }
+                                </>
                             )
                         ) : 'Please wait....'
                     }
                 </tbody>
             </Table>
-
 
 
             {/* Modal */}

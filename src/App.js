@@ -37,14 +37,14 @@ function App() {
 
 
   return (
-    <div className="App">
-      <p>Test Screening React JS Hooks</p>
-      <div className="container">
-        <Table
-            dataSource={dataList}
-         />
-      </div>
-    </div>
+      <div className="App">
+          <p>Test Screening React JS Hooks</p>
+          <div className="container">
+              <Table
+                  dataSource={dataList}
+              />
+          </div>
+      </div>  
   );
 }
 
