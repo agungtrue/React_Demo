@@ -3,6 +3,7 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import { updateData } from '../API/Request'
+import UserInput from './UserInput'
 
 
 const ModalName = (props) => {
@@ -169,38 +170,11 @@ const ModalName = (props) => {
               <Modal.Title>{actionType === 'create' ? 'Create' : 'Update'} Data</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Form>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>User Name</Form.Label>
-                    <Form.Control 
-                        type="text"
-                        value={newData ? newData.user_name : ''}
-                        placeholder="Enter Username" 
-                        onChange={(e) => setNewData({...newData, user_name: e.target.value})} 
-                    />
-                    <div style={{color: 'red'}}> {errorForm.user_name && errorForm.user_name.show ? errorForm.user_name.text : ''} </div>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control 
-                        type="email"
-                        value={newData ? newData.email : ''}
-                        placeholder="Enter Email"
-                        onChange={(e) => setNewData({...newData, email: e.target.value})} 
-                    />
-                    <div style={{color: 'red'}}> {errorForm.email && errorForm.email.show ? errorForm.email.text : ''} </div>
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Score</Form.Label>
-                    <Form.Control 
-                        type="number"
-                        value={newData ? newData.score : ''}
-                        placeholder="Enter Score"
-                        onChange={(e) => setNewData({...newData, score: e.target.value})} 
-                    />
-                    <div style={{color: 'red'}}> {errorForm.score && errorForm.score.show ? errorForm.score.text : ''} </div>
-                </Form.Group>
-                </Form>
+                <UserInput
+                    data={newData}
+                    handleOnChange={setNewData}
+                    errorForm={errorForm}
+                />
             </Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>

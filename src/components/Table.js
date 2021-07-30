@@ -150,7 +150,6 @@ const Tables = (props) => {
                                         <Expanse
                                             data={data}
                                             handleUpdateData={handleUpdateData}
-                                            handleCloseRow={setExpandRow}
                                         />
                                         : ""
                                     }

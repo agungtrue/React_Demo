@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import UserInput from './UserInput'
 
 const Expanse = (props) => {
     const { data: currentData, handleUpdateData } = props
@@ -9,6 +10,13 @@ const Expanse = (props) => {
         user_name: '',
         email: '',
         score: ''
+    })
+
+    // should be have error handling for this component it self, to set the error
+    const [errorForm, setErrorForm] = useState({
+        user_name: { text: '', show: false },
+        email: { text: '', show: false },
+        score: { text: '', show: false }
     })
 
     useEffect(() => {
@@ -21,25 +29,13 @@ const Expanse = (props) => {
     return (
         <>
             <tr>
-                <td></td>
-                <td style={{cursor:'pointer'}} >
-                    <Form.Control 
-                        type="text"
-                        value={dataObj ? dataObj.user_name : ''}
-                        placeholder="Enter Username" 
-                        onChange={(e) => setDataObj({...dataObj, user_name: e.target.value})} 
+                <td style={{cursor:'pointer'}} colspan="4">
+                    <UserInput
+                        data={dataObj}
+                        handleOnChange={setDataObj}
+                        errorForm={errorForm}
                     />
-                </td>
-                <td>
-                    <Form.Control 
-                        type="text"
-                        value={dataObj ? dataObj.score : ''}
-                        placeholder="Enter Score" 
-                        onChange={(e) => setDataObj({...dataObj, score: e.target.value})} 
-                    />
-                </td>
-                <td>
-                    <div style={{cursor:'pointer', display: 'flex', justifyContent: 'space-evenly'}}>
+                    <div style={{cursor:'pointer', display: 'flex', justifyContent: 'flex-end'}}>
                         <Button variant="primary" size="md" onClick={() => handleUpdateData(dataObj)}>
                             Save
                         </Button>
